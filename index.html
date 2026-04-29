@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Катя — имя, в котором небо и сталь</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #A8C5E0;
+    --blue-deep: #6E94B8;
+    --blue-soft: #E8F0F8;
+    --lace: #A8C5E0;          /* primary lace stroke — matches the highlighted center medallion */
+    --lace-soft: #A8C5E0;     /* same throughout (incl. famous section) */
+    --lace-deep: #6E94B8;     /* deeper accent if needed */
+    --ink: #1C1F24;
+    --ink-soft: #3A3F47;
+    --silver: #C9CDD3;
+    --silver-light: #EEF1F5;
+    --paper: #FAFBFC;
+    --white: #FFFFFF;
+    --shadow-sm: 0 2px 12px rgba(28, 31, 36, 0.06);
+    --shadow-md: 0 12px 36px rgba(28, 31, 36, 0.10);
+    --shadow-lg: 0 24px 60px rgba(28, 31, 36, 0.14);
+    --transition: 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 300;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250, 251, 252, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: var(--transition);
+  }
+  .nav.scrolled {
+    background: rgba(255, 255, 255, 0.92);
+    border-bottom-color: var(--silver-light);
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-logo::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 0 4px rgba(168, 197, 224, 0.25);
+  }
+  .nav-menu {
+    display: flex;
+    gap: 38px;
+    list-style: none;
+  }
+  .nav-menu a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    position: relative;
+    padding: 6px 0;
+    transition: color 0.3s;
+  }
+  .nav-menu a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 0; height: 1px;
+    background: var(--blue-deep);
+    transition: width 0.4s ease;
+  }
+  .nav-menu a:hover { color: var(--ink); }
+  .nav-menu a:hover::after { width: 100%; }
+
+  .nav-burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    width: 28px; height: 28px;
+    background: none; border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-burger span {
+    display: block;
+    height: 1.5px;
+    background: var(--ink);
+    transition: var(--transition);
+  }
+  .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-burger.open span:nth-child(2) { opacity: 0; }
+  .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 32px 80px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--blue-soft) 0%, var(--paper) 100%);
+    overflow: hidden;
+  }
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .hero::before {
+    width: 480px; height: 480px;
+    background: var(--blue);
+    top: -120px; left: -120px;
+  }
+  .hero::after {
+    width: 380px; height: 380px;
+    background: #DCE8F3;
+    bottom: -80px; right: -80px;
+  }
+
+  .hero-inner { position: relative; z-index: 3; max-width: 900px; }
+
+  /* ===== VOLOGDA LACE ===== */
+  /* Continuous page-frame: tiling lace running through every section */
+  .page-frame {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: clamp(160px, 16vw, 220px);
+    z-index: 2;
+    pointer-events: none;
+    color: var(--lace);
+  }
+  .page-frame--left  { left: clamp(0px, 1vw, 28px); }
+  .page-frame--right { right: clamp(0px, 1vw, 28px); transform: scaleX(-1); }
+  .page-frame__tile {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  /* Shifts the pattern up by var(--lace-y, 0) so tile boundaries
+     align across sections — produces a seamless infinite lace. */
+  .page-frame__tile .lace-tile-shift {
+    transform: translateY(var(--lace-y, 0px));
+    transform-origin: 0 0;
+  }
+  .page-frame__finial {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 70px;
+    display: block;
+  }
+  .page-frame__finial--top    { top: 0; }
+  .page-frame__finial--bottom { bottom: 0; }
+  /* Lighter variant on dark Famous section */
+  .famous .page-frame { color: var(--lace-soft); opacity: 0.85; }
+  /* Slightly softer on first (hero) section so title stays the star */
+  .hero .page-frame { opacity: 0.92; }
+
+  @media (max-width: 1100px) {
+    .page-frame { display: none; }
+  }
+
+  /* fadeUp animation — same feel as the hero "Катя" title.
+     Triggers per-section via IntersectionObserver on the .reveal class.
+     Right-side variant preserves its scaleX(-1) mirror transform. */
+  .page-frame.reveal {
+    opacity: 0;
+    transition:
+      opacity 1.2s ease,
+      transform 1.2s ease;
+  }
+  .page-frame--left.reveal  { transform: translateY(28px); }
+  .page-frame--right.reveal { transform: scaleX(-1) translateY(28px); }
+  .page-frame--left.reveal.is-visible  { opacity: 1; transform: translateY(0); }
+  .page-frame--right.reveal.is-visible { opacity: 1; transform: scaleX(-1) translateY(0); }
+
+  /* Section divider medallion (replaces .ornament line+dot) */
+  .lace-medallion {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 24px;
+    color: var(--lace);
+    line-height: 0;
+  }
+  .lace-medallion svg { width: 100%; height: 100%; display: block; }
+  /* Same fadeUp feel as the hero title "Катя" — soft rise + fade */
+  .reveal .lace-medallion {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 1.2s 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.2s 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible .lace-medallion { opacity: 1; transform: translateY(0); }
+  /* Lighter variant on dark Famous section */
+  .famous .lace-medallion { color: var(--lace-soft); }
+
+  /* Subtle lace corner accents for cards */
+  .lace-corner {
+    position: absolute;
+    width: 44px; height: 44px;
+    color: var(--lace);
+    opacity: 0.4;
+    pointer-events: none;
+    line-height: 0;
+    transition: opacity 0.4s ease;
+  }
+  .lace-corner svg { width: 100%; height: 100%; display: block; }
+  .lace-corner--tl { top: 10px; left: 10px; }
+  .lace-corner--tr { top: 10px; right: 10px; transform: scaleX(-1); }
+  .form-card:hover .lace-corner,
+  .review:hover .lace-corner { opacity: 0.7; }
+
+  .hero-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--blue-deep);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 1s 0.2s forwards;
+  }
+  .hero-eyebrow span {
+    display: inline-block;
+    padding: 0 18px;
+    position: relative;
+  }
+  .hero-eyebrow span::before, .hero-eyebrow span::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 60px; height: 1px;
+    background: var(--silver);
+  }
+  .hero-eyebrow span::before { right: 100%; }
+  .hero-eyebrow span::after { left: 100%; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(5rem, 18vw, 14rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.4s forwards;
+    background: linear-gradient(180deg, var(--ink) 0%, var(--ink) 60%, var(--blue-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 0 auto 48px;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.7s forwards;
+  }
+
+  .hero-scroll {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: var(--ink-soft);
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s 1s forwards;
+  }
+  .hero-scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(180deg, var(--silver), transparent);
+    animation: scrollLine 2.5s ease-in-out infinite;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleY(1); transform-origin: top; }
+    50% { transform: scaleY(0.3); transform-origin: top; }
+  }
+
+  /* ===== SECTION COMMON ===== */
+  section { padding: 110px 32px; position: relative; }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .section-head { text-align: center; margin-bottom: 72px; }
+  .section-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--blue-deep);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: inline-block;
+  }
+  .section-title {
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    margin-bottom: 22px;
+  }
+  .section-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .ornament {
+    width: 80px; height: 24px;
+    margin: 0 auto 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .ornament::before, .ornament::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--silver);
+  }
+  .ornament-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+    transform: rotate(45deg);
+    border-radius: 1px;
+  }
+
+  /* ===== ORIGIN ===== */
+  .origin { background: var(--white); }
+  .origin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .origin-text p {
+    margin-bottom: 22px;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+  }
+  .origin-text p:first-of-type::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    float: left;
+    line-height: 0.9;
+    margin: 6px 14px -4px 0;
+    color: var(--blue-deep);
+    font-weight: 600;
+  }
+  .origin-card {
+    background: linear-gradient(160deg, var(--blue-soft), var(--white));
+    padding: 56px 44px;
+    border-radius: 4px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(168, 197, 224, 0.3);
+  }
+  .origin-card::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(168, 197, 224, 0.4);
+    pointer-events: none;
+  }
+  .origin-greek {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 2.6rem;
+    color: var(--blue-deep);
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+  .origin-translit {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    letter-spacing: 0.08em;
+  }
+  .origin-meaning {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .origin-meaning em {
+    color: var(--blue-deep);
+    font-style: italic;
+  }
+
+  /* ===== FORMS ===== */
+  .forms { background: var(--paper); }
+  .forms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .form-card {
+    background: var(--white);
+    padding: 38px 32px;
+    border-radius: 4px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--silver-light);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+  }
+  .form-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  .form-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(168, 197, 224, 0.5);
+  }
+  .form-card:hover::before { transform: translateX(0); }
+
+  .form-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .form-pron {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--blue-deep);
+    margin-bottom: 18px;
+    letter-spacing: 0.05em;
+  }
+  .form-card p {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  /* ===== FAMOUS ===== */
+  .famous { background: var(--ink); color: var(--silver-light); }
+  .famous .section-title { color: var(--white); }
+  .famous .section-eyebrow { color: var(--blue); }
+  .famous .section-sub { color: var(--silver); }
+  .famous .ornament::before, .famous .ornament::after { background: rgba(201, 205, 211, 0.25); }
+  .famous .ornament-dot { background: var(--blue); }
+
+  .famous-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+  }
+  .famous-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(168, 197, 224, 0.15);
+    padding: 40px 34px;
+    border-radius: 4px;
+    transition: var(--transition);
+    position: relative;
+  }
+  .famous-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 50%;
+    width: 0; height: 1px;
+    background: var(--blue);
+    transition: all 0.5s ease;
+    transform: translateX(-50%);
+  }
+  .famous-card:hover {
+    background: rgba(168, 197, 224, 0.06);
+    border-color: rgba(168, 197, 224, 0.4);
+    transform: translateY(-4px);
+  }
+  .famous-card:hover::after { width: 60%; }
+
+  .famous-years {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--blue);
+    letter-spacing: 0.12em;
+    margin-bottom: 14px;
+  }
+  .famous-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.55rem;
+    color: var(--white);
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+  .famous-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--blue);
+    margin-bottom: 18px;
+  }
+  .famous-card p {
+    font-size: 0.94rem;
+    color: var(--silver);
+    line-height: 1.7;
+  }
+
+  /* ===== CHARACTER ===== */
+  .character { background: var(--white); }
+  .character-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .character-traits { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .trait {
+    padding: 24px 22px;
+    background: var(--paper);
+    border-left: 2px solid var(--blue);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+  .trait:hover {
+    background: var(--blue-soft);
+    border-left-color: var(--blue-deep);
+    transform: translateX(4px);
+  }
+  .trait-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .trait p { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.55; margin: 0; }
+
+  .character-text p {
+    margin-bottom: 22px;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+  }
+  .character-quote {
+    margin-top: 32px;
+    padding: 30px 28px;
+    background: linear-gradient(135deg, var(--blue-soft), var(--white));
+    border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--ink);
+    line-height: 1.5;
+    position: relative;
+    border: 1px solid rgba(168, 197, 224, 0.3);
+  }
+  .character-quote::before {
+    content: "\201C";
+    position: absolute;
+    top: -10px; left: 18px;
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    color: var(--blue);
+    line-height: 1;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact {
+    background: linear-gradient(180deg, var(--paper) 0%, var(--blue-soft) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact::before {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(168,197,224,0.18) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .contact-inner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; }
+
+  .contact-form {
+    position: relative;
+    background: var(--white);
+    padding: 56px 48px;
+    border-radius: 6px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(90, 130, 172, 0.22);
+  }
+  .form-row { margin-bottom: 22px; }
+  .form-row label {
+    display: block;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .form-row input, .form-row textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--paper);
+    border: 1px solid var(--silver-light);
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--ink);
+    transition: var(--transition);
+    resize: vertical;
+  }
+  .form-row textarea { min-height: 130px; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; }
+  .form-row input:focus, .form-row textarea:focus {
+    outline: none;
+    border-color: var(--blue);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(168, 197, 224, 0.18);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 38px;
+    background: var(--ink);
+    color: var(--white);
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--blue-deep);
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    z-index: 0;
+  }
+  .btn span { position: relative; z-index: 1; }
+  .btn:hover::before { transform: translateY(0); }
+  .btn:hover { border-color: var(--blue-deep); }
+
+  .reviews { margin-top: 64px; }
+  .reviews-title {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+  .review-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+  }
+  .review {
+    background: var(--white);
+    padding: 28px 26px;
+    border-radius: 4px;
+    border: 1px solid rgba(168, 197, 224, 0.25);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+  .review:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .review p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.08rem;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .review-author {
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue-deep);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--ink);
+    color: var(--silver);
+    padding: 50px 32px;
+    text-align: center;
+  }
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--white);
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    margin-bottom: 18px;
+  }
+  .footer small { font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(201,205,211,0.5); }
+
+  /* ===== REVEAL ANIMATION ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .nav-menu {
+      position: fixed;
+      top: 70px; left: 0; right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: var(--white);
+      padding: 20px 0;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-120%);
+      transition: transform 0.4s ease;
+    }
+    .nav-menu.open { transform: translateY(0); }
+    .nav-menu a { display: block; padding: 14px 32px; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; }
+    .nav-burger { display: flex; }
+
+    .origin-grid, .character-grid { grid-template-columns: 1fr; gap: 50px; }
+    .character-traits { grid-template-columns: 1fr 1fr; }
+    section { padding: 80px 24px; }
+    .contact-form { padding: 38px 28px; }
+  }
+
+  @media (max-width: 520px) {
+    .character-traits { grid-template-columns: 1fr; }
+    .nav-inner { padding: 14px 22px; }
+    .nav-logo { font-size: 1.4rem; }
+    .hero { padding: 110px 22px 60px; }
+    .origin-card { padding: 40px 26px; }
+    .origin-greek { font-size: 2rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Vologda lace SVG library (hidden, used via <use>) ===== -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <!-- Single round lace medallion (used both standalone and stacked in column) -->
+    <symbol id="laceMedallion" viewBox="-50 -50 100 100" overflow="visible">
+      <!-- 12 outer scallops -->
+      <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <circle r="42"/>
+        <path d="M 36 -8 Q 44 0 36 8"/>
+        <path d="M 36 -8 Q 44 0 36 8" transform="rotate(30)"/>
+        <path d="M 36 -8 Q 44 0 36 8" transform="rotate(60)"/>
+        <path d="M 36 -8 Q 44 0 36 8" transform="rotate(90)"/>
+        <path d="M 36 -8 Q 44 0 36 8" transform="rotate(120)"/>
+        <path d="M 36 -8 Q 44 0 36 8" transform="rotate(150)"/>
+        <path d="M 36 -8 Q 44 0 36 8" transform="rotate(180)"/>
+        <path d="M 36 -8 Q 44 0 36 8" transform="rotate(210)"/>
+        <path d="M 36 -8 Q 44 0 36 8" transform="rotate(240)"/>
+        <path d="M 36 -8 Q 44 0 36 8" transform="rotate(270)"/>
+        <path d="M 36 -8 Q 44 0 36 8" transform="rotate(300)"/>
+        <path d="M 36 -8 Q 44 0 36 8" transform="rotate(330)"/>
+      </g>
+      <!-- 8 inner petals forming an 8-pointed flower -->
+      <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <path d="M 0 -28 Q -7 -18 -8 -8 Q -3 0 0 -2 Q 3 0 8 -8 Q 7 -18 0 -28 Z"/>
+        <path d="M 0 -28 Q -7 -18 -8 -8 Q -3 0 0 -2 Q 3 0 8 -8 Q 7 -18 0 -28 Z" transform="rotate(45)"/>
+        <path d="M 0 -28 Q -7 -18 -8 -8 Q -3 0 0 -2 Q 3 0 8 -8 Q 7 -18 0 -28 Z" transform="rotate(90)"/>
+        <path d="M 0 -28 Q -7 -18 -8 -8 Q -3 0 0 -2 Q 3 0 8 -8 Q 7 -18 0 -28 Z" transform="rotate(135)"/>
+        <path d="M 0 -28 Q -7 -18 -8 -8 Q -3 0 0 -2 Q 3 0 8 -8 Q 7 -18 0 -28 Z" transform="rotate(180)"/>
+        <path d="M 0 -28 Q -7 -18 -8 -8 Q -3 0 0 -2 Q 3 0 8 -8 Q 7 -18 0 -28 Z" transform="rotate(225)"/>
+        <path d="M 0 -28 Q -7 -18 -8 -8 Q -3 0 0 -2 Q 3 0 8 -8 Q 7 -18 0 -28 Z" transform="rotate(270)"/>
+        <path d="M 0 -28 Q -7 -18 -8 -8 Q -3 0 0 -2 Q 3 0 8 -8 Q 7 -18 0 -28 Z" transform="rotate(315)"/>
+      </g>
+      <!-- Connector lines between outer ring and inner petals -->
+      <g stroke="currentColor" stroke-width="0.7" opacity="0.7">
+        <line x1="0" y1="-22" x2="0" y2="-12" transform="rotate(22.5)"/>
+        <line x1="0" y1="-22" x2="0" y2="-12" transform="rotate(67.5)"/>
+        <line x1="0" y1="-22" x2="0" y2="-12" transform="rotate(112.5)"/>
+        <line x1="0" y1="-22" x2="0" y2="-12" transform="rotate(157.5)"/>
+        <line x1="0" y1="-22" x2="0" y2="-12" transform="rotate(202.5)"/>
+        <line x1="0" y1="-22" x2="0" y2="-12" transform="rotate(247.5)"/>
+        <line x1="0" y1="-22" x2="0" y2="-12" transform="rotate(292.5)"/>
+        <line x1="0" y1="-22" x2="0" y2="-12" transform="rotate(337.5)"/>
+      </g>
+      <!-- Center -->
+      <circle r="3.5" fill="currentColor"/>
+      <circle r="6" fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.6"/>
+    </symbol>
+
+    <!-- Vertical lace column for hero sides -->
+    <symbol id="laceColumn" viewBox="0 0 200 900" overflow="visible">
+      <!-- Top finial -->
+      <g transform="translate(100 50)" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round">
+        <path d="M -12 0 Q 0 -10 12 0"/>
+        <circle cx="0" cy="-12" r="3" fill="currentColor"/>
+        <line x1="0" y1="-8" x2="0" y2="80"/>
+      </g>
+      <!-- Bottom finial -->
+      <g transform="translate(100 850)" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round">
+        <path d="M -12 0 Q 0 10 12 0"/>
+        <circle cx="0" cy="12" r="3" fill="currentColor"/>
+        <line x1="0" y1="8" x2="0" y2="-80"/>
+      </g>
+
+      <!-- 4 medallions stacked at y = 150, 350, 550, 750 -->
+      <g transform="translate(100 150)"><use href="#laceMedallion" width="92" height="92" x="-46" y="-46"/></g>
+      <g transform="translate(100 350)"><use href="#laceMedallion" width="96" height="96" x="-48" y="-48"/></g>
+      <g transform="translate(100 550)"><use href="#laceMedallion" width="96" height="96" x="-48" y="-48"/></g>
+      <g transform="translate(100 750)"><use href="#laceMedallion" width="92" height="92" x="-46" y="-46"/></g>
+
+      <!-- Lace mesh between medallions: 4 strands curving from one to next -->
+      <g stroke="currentColor" stroke-width="0.8" fill="none" stroke-linecap="round">
+        <!-- 150 → 350 -->
+        <path d="M 78 192 Q 60 250 78 308"/>
+        <path d="M 122 192 Q 140 250 122 308"/>
+        <path d="M 100 196 Q 86 250 100 304"/>
+        <path d="M 100 196 Q 114 250 100 304"/>
+        <!-- 350 → 550 -->
+        <path d="M 78 394 Q 60 450 78 506"/>
+        <path d="M 122 394 Q 140 450 122 506"/>
+        <path d="M 100 398 Q 86 450 100 502"/>
+        <path d="M 100 398 Q 114 450 100 502"/>
+        <!-- 550 → 750 -->
+        <path d="M 78 594 Q 60 650 78 706"/>
+        <path d="M 122 594 Q 140 650 122 706"/>
+        <path d="M 100 598 Q 86 650 100 702"/>
+        <path d="M 100 598 Q 114 650 100 702"/>
+      </g>
+
+      <!-- Tiny center pearls along mesh -->
+      <g fill="currentColor">
+        <circle cx="68" cy="250" r="2"/><circle cx="132" cy="250" r="2"/>
+        <circle cx="100" cy="234" r="1.4"/><circle cx="100" cy="266" r="1.4"/>
+        <circle cx="68" cy="450" r="2"/><circle cx="132" cy="450" r="2"/>
+        <circle cx="100" cy="434" r="1.4"/><circle cx="100" cy="466" r="1.4"/>
+        <circle cx="68" cy="650" r="2"/><circle cx="132" cy="650" r="2"/>
+        <circle cx="100" cy="634" r="1.4"/><circle cx="100" cy="666" r="1.4"/>
+      </g>
+
+      <!-- Cross-bridges at midpoints -->
+      <g stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.6">
+        <path d="M 68 250 Q 100 238 132 250"/>
+        <path d="M 68 250 Q 100 262 132 250"/>
+        <path d="M 68 450 Q 100 438 132 450"/>
+        <path d="M 68 450 Q 100 462 132 450"/>
+        <path d="M 68 650 Q 100 638 132 650"/>
+        <path d="M 68 650 Q 100 662 132 650"/>
+      </g>
+
+      <!-- Subtle border dots along outer guide lines -->
+      <g fill="currentColor" opacity="0.5">
+        <circle cx="34" cy="120" r="1"/><circle cx="166" cy="120" r="1"/>
+        <circle cx="34" cy="200" r="1"/><circle cx="166" cy="200" r="1"/>
+        <circle cx="34" cy="320" r="1"/><circle cx="166" cy="320" r="1"/>
+        <circle cx="34" cy="400" r="1"/><circle cx="166" cy="400" r="1"/>
+        <circle cx="34" cy="520" r="1"/><circle cx="166" cy="520" r="1"/>
+        <circle cx="34" cy="600" r="1"/><circle cx="166" cy="600" r="1"/>
+        <circle cx="34" cy="720" r="1"/><circle cx="166" cy="720" r="1"/>
+        <circle cx="34" cy="800" r="1"/><circle cx="166" cy="800" r="1"/>
+      </g>
+    </symbol>
+
+    <!-- Tiny lace corner accent (1/4 of a medallion) -->
+    <symbol id="laceCorner" viewBox="0 0 60 60" overflow="visible">
+      <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <path d="M 6 6 Q 30 6 30 30"/>
+        <path d="M 12 6 Q 30 12 30 30"/>
+        <path d="M 6 12 Q 12 30 30 30"/>
+      </g>
+      <g fill="currentColor">
+        <circle cx="6" cy="6" r="1.6"/>
+        <circle cx="18" cy="6" r="1.2"/>
+        <circle cx="6" cy="18" r="1.2"/>
+      </g>
+    </symbol>
+
+    <!-- Tiling lace unit: medallion + half-mesh top + half-mesh bottom -->
+    <!-- color is set explicitly because <pattern> inherits from its DOM ancestors,
+         not from the element that references it via fill="url(#laceTile)" -->
+    <pattern id="laceTile" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse" style="color: var(--lace);">
+      <!-- Medallion at center -->
+      <use href="#laceMedallion" width="84" height="84" x="58" y="58"/>
+      <!-- Upper mesh: continues from previous tile -->
+      <g fill="none" stroke="currentColor" stroke-width="0.85" stroke-linecap="round">
+        <path d="M 78 0 Q 60 30 78 60"/>
+        <path d="M 122 0 Q 140 30 122 60"/>
+        <path d="M 100 4 Q 86 30 100 56"/>
+        <path d="M 100 4 Q 114 30 100 56"/>
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="0.55" opacity="0.65">
+        <path d="M 60 30 Q 100 18 140 30"/>
+        <path d="M 60 30 Q 100 42 140 30"/>
+      </g>
+      <g fill="currentColor">
+        <circle cx="60"  cy="30" r="1.7"/>
+        <circle cx="140" cy="30" r="1.7"/>
+        <circle cx="100" cy="14" r="1.2"/>
+        <circle cx="100" cy="46" r="1.2"/>
+      </g>
+      <!-- Lower mesh: continues into next tile -->
+      <g fill="none" stroke="currentColor" stroke-width="0.85" stroke-linecap="round">
+        <path d="M 78 140 Q 60 170 78 200"/>
+        <path d="M 122 140 Q 140 170 122 200"/>
+        <path d="M 100 144 Q 86 170 100 196"/>
+        <path d="M 100 144 Q 114 170 100 196"/>
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="0.55" opacity="0.65">
+        <path d="M 60 170 Q 100 158 140 170"/>
+        <path d="M 60 170 Q 100 182 140 170"/>
+      </g>
+      <g fill="currentColor">
+        <circle cx="60"  cy="170" r="1.7"/>
+        <circle cx="140" cy="170" r="1.7"/>
+        <circle cx="100" cy="154" r="1.2"/>
+        <circle cx="100" cy="186" r="1.2"/>
+      </g>
+      <!-- Outer guide-line dots -->
+      <g fill="currentColor" opacity="0.45">
+        <circle cx="34"  cy="100" r="1"/>
+        <circle cx="166" cy="100" r="1"/>
+      </g>
+    </pattern>
+
+    <!-- Top finial (decorative cap above first medallion) -->
+    <symbol id="laceTopFinial" viewBox="0 0 200 80" overflow="visible">
+      <g stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round">
+        <path d="M 86 8 Q 100 -2 114 8"/>
+        <line x1="100" y1="14" x2="100" y2="60"/>
+      </g>
+      <circle cx="100" cy="6" r="2.5" fill="currentColor"/>
+      <g fill="currentColor">
+        <circle cx="78" cy="60" r="1.4"/>
+        <circle cx="122" cy="60" r="1.4"/>
+      </g>
+    </symbol>
+
+    <!-- Bottom finial (decorative cap below last medallion) -->
+    <symbol id="laceBottomFinial" viewBox="0 0 200 80" overflow="visible">
+      <g stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round">
+        <path d="M 86 72 Q 100 82 114 72"/>
+        <line x1="100" y1="20" x2="100" y2="66"/>
+      </g>
+      <circle cx="100" cy="74" r="2.5" fill="currentColor"/>
+      <g fill="currentColor">
+        <circle cx="78" cy="20" r="1.4"/>
+        <circle cx="122" cy="20" r="1.4"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Катя</a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#origin">Происхождение</a></li>
+      <li><a href="#forms">Формы имени</a></li>
+      <li><a href="#famous">Знаменитые Кати</a></li>
+      <li><a href="#character">Характер</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <button class="nav-burger" id="navBurger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <!-- Vologda lace page-frame -->
+  <div class="page-frame page-frame--left reveal" aria-hidden="true">
+    <svg class="page-frame__finial page-frame__finial--top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" preserveAspectRatio="xMidYMin meet"><use href="#laceTopFinial"/></svg>
+    <svg class="page-frame__tile" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g class="lace-tile-shift"><rect y="-200" width="100%" height="9999" fill="url(#laceTile)"/></g></svg>
+  </div>
+  <div class="page-frame page-frame--right reveal" aria-hidden="true">
+    <svg class="page-frame__finial page-frame__finial--top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" preserveAspectRatio="xMidYMin meet"><use href="#laceTopFinial"/></svg>
+    <svg class="page-frame__tile" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g class="lace-tile-shift"><rect y="-200" width="100%" height="9999" fill="url(#laceTile)"/></g></svg>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span>Русское имя</span></div>
+    <h1>Катя</h1>
+    <p class="hero-sub">
+      В одном коротком имени — небо первого снега, шёпот свечи и сталь
+      императорской воли. Мягкое и сильное одновременно.
+    </p>
+    <a href="#origin" class="hero-scroll">
+      <span>Узнать историю</span>
+      <span class="hero-scroll-line"></span>
+    </a>
+  </div>
+</header>
+
+<!-- ORIGIN -->
+<section class="origin" id="origin">
+  <div class="page-frame page-frame--left reveal" aria-hidden="true">
+    <svg class="page-frame__tile" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g class="lace-tile-shift"><rect y="-200" width="100%" height="9999" fill="url(#laceTile)"/></g></svg>
+  </div>
+  <div class="page-frame page-frame--right reveal" aria-hidden="true">
+    <svg class="page-frame__tile" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g class="lace-tile-shift"><rect y="-200" width="100%" height="9999" fill="url(#laceTile)"/></g></svg>
+  </div>
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="lace-medallion" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><use href="#laceMedallion" x="0" y="0" width="100" height="100"/></svg>
+      </div>
+      <span class="section-eyebrow">Глава первая</span>
+      <h2 class="section-title">Происхождение имени</h2>
+      <p class="section-sub">Дорога длиной в две тысячи лет — из греческих храмов в русские летописи</p>
+    </div>
+
+    <div class="origin-grid">
+      <div class="origin-text reveal">
+        <p>
+          Имя пришло из древнегреческого языка, где звучало как
+          <em>Αἰκατερίνη</em> и связывалось со словом <em>καθαρός</em> — «чистый,
+          непорочный». В этом корне — главный смысл: ясность души, прозрачность
+          намерений, твёрдость в выборе своего пути.
+        </p>
+        <p>
+          В русскую культуру имя вошло вместе с христианством, через греческие
+          святцы, и быстро прижилось. Святая Екатерина Александрийская — учёная
+          мученица, не побоявшаяся спорить с императором, — стала покровительницей
+          русских девочек, которым желали ума, образованности и стойкости.
+        </p>
+        <p>
+          На русской почве торжественная «Екатерина» обрела домашнюю, певучую
+          форму — «Катя». Это имя XVIII век сделал именем эпохи: при двух
+          императрицах оно звучало с трона, а в XIX‑м — стало именем литературных
+          героинь Толстого, Островского, Пастернака.
+        </p>
+      </div>
+
+      <div class="origin-card reveal reveal-delay-2">
+        <div class="origin-greek">Αἰκατερίνη</div>
+        <div class="origin-translit">Aikateríne</div>
+        <div class="origin-meaning">
+          «<em>Чистая</em>,<br>непорочная,<br>светлая душой»
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMS -->
+<section class="forms" id="forms">
+  <div class="page-frame page-frame--left reveal" aria-hidden="true">
+    <svg class="page-frame__tile" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g class="lace-tile-shift"><rect y="-200" width="100%" height="9999" fill="url(#laceTile)"/></g></svg>
+  </div>
+  <div class="page-frame page-frame--right reveal" aria-hidden="true">
+    <svg class="page-frame__tile" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g class="lace-tile-shift"><rect y="-200" width="100%" height="9999" fill="url(#laceTile)"/></g></svg>
+  </div>
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="lace-medallion" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><use href="#laceMedallion" x="0" y="0" width="100" height="100"/></svg>
+      </div>
+      <span class="section-eyebrow">Глава вторая</span>
+      <h2 class="section-title">Формы имени</h2>
+      <p class="section-sub">У имени Катя — десятки оттенков. От парадного «Екатерина Сергеевна» до домашнего «Катюша»</p>
+    </div>
+
+    <div class="forms-grid">
+      <div class="form-card reveal">
+        <div class="form-name">Катя</div>
+        <div class="form-pron">основная форма</div>
+        <p>Универсальное имя на каждый день — для друзей, коллег, родных. Лёгкое, тёплое, без лишней чопорности.</p>
+      </div>
+      <div class="form-card reveal reveal-delay-1">
+        <div class="form-name">Катенька</div>
+        <div class="form-pron">нежная, домашняя</div>
+        <p>Так называют любимую дочь, внучку, близкую подругу. Произносится с интонацией, в которой слышится забота.</p>
+      </div>
+      <div class="form-card reveal reveal-delay-2">
+        <div class="form-name">Катюша</div>
+        <div class="form-pron">песенная, лиричная</div>
+        <p>Имя из той самой военной песни — символ верности и ожидания. Уместно с близкими и в дружеском кругу.</p>
+      </div>
+      <div class="form-card reveal reveal-delay-3">
+        <div class="form-name">Катюшенька</div>
+        <div class="form-pron">самая мягкая</div>
+        <p>Двойной уменьшительный — почти колыбельный. Так зовут совсем маленьких или той, к кому испытывают особую нежность.</p>
+      </div>
+      <div class="form-card reveal">
+        <div class="form-name">Екатерина</div>
+        <div class="form-pron">полная, торжественная</div>
+        <p>Имя для документов, для официальных представлений, для уважительного обращения. В нём слышится императорская сдержанность.</p>
+      </div>
+      <div class="form-card reveal reveal-delay-1">
+        <div class="form-name">Катрин</div>
+        <div class="form-pron">европейская нота</div>
+        <p>Французский извод имени. Используется как творческий псевдоним или дружеское прозвище — лёгкая нотка космополитизма.</p>
+      </div>
+      <div class="form-card reveal reveal-delay-2">
+        <div class="form-name">Катюха</div>
+        <div class="form-pron">свойская, дружеская</div>
+        <p>Так зовут «свою в доску» — подругу детства, ту, с кем не нужно держать осанку. Звучит грубовато, но всегда по‑доброму.</p>
+      </div>
+      <div class="form-card reveal reveal-delay-3">
+        <div class="form-name">Катерина</div>
+        <div class="form-pron">народная форма</div>
+        <p>Простонародный извод — без буквы «е» в начале. В русской классике так звучит имя сильных, страстных героинь.</p>
+      </div>
+      <div class="form-card reveal">
+        <div class="form-name">Кэт</div>
+        <div class="form-pron">современный англицизм</div>
+        <p>Городское, лёгкое обращение в духе западной поп‑культуры. Часто звучит в IT‑команде, в творческой тусовке, в инстаграме — там, где имя становится ником.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAMOUS -->
+<section class="famous" id="famous">
+  <div class="page-frame page-frame--left reveal" aria-hidden="true">
+    <svg class="page-frame__tile" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g class="lace-tile-shift"><rect y="-200" width="100%" height="9999" fill="url(#laceTile)"/></g></svg>
+  </div>
+  <div class="page-frame page-frame--right reveal" aria-hidden="true">
+    <svg class="page-frame__tile" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g class="lace-tile-shift"><rect y="-200" width="100%" height="9999" fill="url(#laceTile)"/></g></svg>
+  </div>
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="lace-medallion" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><use href="#laceMedallion" x="0" y="0" width="100" height="100"/></svg>
+      </div>
+      <span class="section-eyebrow">Глава третья</span>
+      <h2 class="section-title">Великие Кати в истории</h2>
+      <p class="section-sub">Императрицы, учёные, балерины — те, кто сделал это имя громким</p>
+    </div>
+
+    <div class="famous-grid">
+      <article class="famous-card reveal">
+        <div class="famous-years">1684 — 1727</div>
+        <h3 class="famous-name">Екатерина I</h3>
+        <div class="famous-role">первая императрица России</div>
+        <p>Жена Петра Великого, прошедшая путь от прислуги до трона. После смерти мужа возглавила империю и стала первой в истории России самодержавной правительницей.</p>
+      </article>
+
+      <article class="famous-card reveal reveal-delay-1">
+        <div class="famous-years">1729 — 1796</div>
+        <h3 class="famous-name">Екатерина II Великая</h3>
+        <div class="famous-role">императрица, реформатор, философ</div>
+        <p>34 года на престоле — золотой век дворянства, расширение империи, переписка с Вольтером. Имя «Екатерина» при ней стало синонимом просвещённой власти.</p>
+      </article>
+
+      <article class="famous-card reveal reveal-delay-2">
+        <div class="famous-years">1743 — 1810</div>
+        <h3 class="famous-name">Екатерина Дашкова</h3>
+        <div class="famous-role">княгиня, директор Академии наук</div>
+        <p>Первая в Европе женщина — глава академии. Стояла у истоков Российской академии, составляла словарь русского языка, дружила с Дидро и Адамом Смитом.</p>
+      </article>
+
+      <article class="famous-card reveal reveal-delay-3">
+        <div class="famous-years">1939 — 2009</div>
+        <h3 class="famous-name">Екатерина Максимова</h3>
+        <div class="famous-role">прима Большого театра</div>
+        <p>Балерина, чья «Жизель» стала эталоном XX века. Тридцать лет на сцене Большого, ученица Галины Улановой, муза хореографа Владимира Васильева.</p>
+      </article>
+
+      <article class="famous-card reveal">
+        <div class="famous-years">1864 — 1910</div>
+        <h3 class="famous-name">Екатерина Гельцер</h3>
+        <div class="famous-role">балерина, первая народная артистка</div>
+        <p>Прима Большого театра рубежа веков, первая балерина, удостоенная звания народной артистки Республики. Соединила академическую школу с новой выразительностью.</p>
+      </article>
+
+      <article class="famous-card reveal reveal-delay-1">
+        <div class="famous-years">1869 — 1939</div>
+        <h3 class="famous-name">Екатерина Пешкова</h3>
+        <div class="famous-role">правозащитник, жена Максима Горького</div>
+        <p>Создала «Помощь политическим заключённым» — единственную легальную правозащитную организацию в раннем СССР. Спасла от лагерей сотни людей.</p>
+      </article>
+
+      <article class="famous-card reveal reveal-delay-2">
+        <div class="famous-years">1923 — 2009</div>
+        <h3 class="famous-name">Екатерина Фурцева</h3>
+        <div class="famous-role">министр культуры СССР</div>
+        <p>Единственная женщина в Президиуме ЦК КПСС хрущёвской эпохи. 14 лет руководила советской культурой — от гастролей Большого до выставок импрессионистов.</p>
+      </article>
+
+      <article class="famous-card reveal reveal-delay-3">
+        <div class="famous-years">р. 1972</div>
+        <h3 class="famous-name">Екатерина Андреева</h3>
+        <div class="famous-role">журналист, телеведущая</div>
+        <p>Один из символов российского телевидения 1990‑2010‑х. Голос, по которому несколько поколений узнавали главные новости страны.</p>
+      </article>
+
+      <article class="famous-card reveal">
+        <div class="famous-years">р. 1971</div>
+        <h3 class="famous-name">Екатерина Гордеева</h3>
+        <div class="famous-role">двукратная олимпийская чемпионка</div>
+        <p>Легенда парного фигурного катания. С Сергеем Гриньковым выиграла два олимпийских золота — в Калгари и Лиллехаммере, — задав эталон ледового дуэта на десятилетия вперёд.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CHARACTER -->
+<section class="character" id="character">
+  <div class="page-frame page-frame--left reveal" aria-hidden="true">
+    <svg class="page-frame__tile" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g class="lace-tile-shift"><rect y="-200" width="100%" height="9999" fill="url(#laceTile)"/></g></svg>
+  </div>
+  <div class="page-frame page-frame--right reveal" aria-hidden="true">
+    <svg class="page-frame__tile" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g class="lace-tile-shift"><rect y="-200" width="100%" height="9999" fill="url(#laceTile)"/></g></svg>
+  </div>
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="lace-medallion" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><use href="#laceMedallion" x="0" y="0" width="100" height="100"/></svg>
+      </div>
+      <span class="section-eyebrow">Глава четвёртая</span>
+      <h2 class="section-title">Характер и судьба</h2>
+      <p class="section-sub">То, что традиция приписывает обладательницам этого имени</p>
+    </div>
+
+    <div class="character-grid">
+      <div class="character-text reveal">
+        <p>
+          Считается, что Кати с детства — наблюдатели. Они учатся быстро, но не
+          напоказ; читают много, но редко хвастаются прочитанным. Внутри —
+          стержень, снаружи — мягкость, и эта пара даёт характерную для имени
+          интонацию: спокойную силу.
+        </p>
+        <p>
+          Во взрослой жизни Катя обычно знает, чего хочет. Она умеет ждать, но
+          умеет и принимать решения за секунду — особенно когда речь о близких.
+          На неё можно опереться, и это знают все вокруг. Иногда даже слишком.
+        </p>
+        <p>
+          В любви Катя верна — но не покорна. В работе — упорна, но не
+          фанатична. В дружбе — внимательна, но без сентиментальности. Это имя
+          ровного света, не вспышек.
+        </p>
+
+        <div class="character-quote">
+          В каждой Кате живёт немного императрицы — и немного девочки,
+          которая боится, что её не услышат. Услышьте — и она сделает для вас
+          невозможное.
+        </div>
+      </div>
+
+      <div class="character-traits reveal reveal-delay-2">
+        <div class="trait">
+          <h4 class="trait-title">Внутренняя сила</h4>
+          <p>Спокойная, без надрыва. Видна в кризисе, не в обыденности.</p>
+        </div>
+        <div class="trait">
+          <h4 class="trait-title">Чувство вкуса</h4>
+          <p>В одежде, словах, людях. Замечает фальшь раньше других.</p>
+        </div>
+        <div class="trait">
+          <h4 class="trait-title">Эмпатия</h4>
+          <p>Слушает не из вежливости, а из настоящего интереса к человеку.</p>
+        </div>
+        <div class="trait">
+          <h4 class="trait-title">Любовь к слову</h4>
+          <p>Книги, языки, переписка. Часто — литературный или редакторский талант.</p>
+        </div>
+        <div class="trait">
+          <h4 class="trait-title">Гордость</h4>
+          <p>Не позволит унизить себя дважды. Прощает один раз — и навсегда уходит.</p>
+        </div>
+        <div class="trait">
+          <h4 class="trait-title">Верность</h4>
+          <p>Друзьям, семье, своему слову. Это её главная валюта.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="page-frame page-frame--left reveal" aria-hidden="true">
+    <svg class="page-frame__tile" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g class="lace-tile-shift"><rect y="-200" width="100%" height="9999" fill="url(#laceTile)"/></g></svg>
+    <svg class="page-frame__finial page-frame__finial--bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" preserveAspectRatio="xMidYMax meet"><use href="#laceBottomFinial"/></svg>
+  </div>
+  <div class="page-frame page-frame--right reveal" aria-hidden="true">
+    <svg class="page-frame__tile" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g class="lace-tile-shift"><rect y="-200" width="100%" height="9999" fill="url(#laceTile)"/></g></svg>
+    <svg class="page-frame__finial page-frame__finial--bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" preserveAspectRatio="xMidYMax meet"><use href="#laceBottomFinial"/></svg>
+  </div>
+  <div class="contact-inner">
+    <div class="section-head reveal">
+      <div class="lace-medallion" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><use href="#laceMedallion" x="0" y="0" width="100" height="100"/></svg>
+      </div>
+      <span class="section-eyebrow">Эпилог</span>
+      <h2 class="section-title">Поделитесь историей вашей Кати</h2>
+      <p class="section-sub">Каждое имя живёт в людях, которые его носят. Расскажите о своей</p>
+    </div>
+
+    <form class="contact-form reveal" id="contactForm" novalidate>
+      <div class="lace-corner lace-corner--tl" aria-hidden="true"><svg viewBox="0 0 60 60"><use href="#laceCorner"/></svg></div>
+      <div class="lace-corner lace-corner--tr" aria-hidden="true"><svg viewBox="0 0 60 60"><use href="#laceCorner"/></svg></div>
+      <div class="form-row">
+        <label for="name">Ваше имя</label>
+        <input type="text" id="name" name="name" placeholder="Как вас зовут" required>
+      </div>
+      <div class="form-row">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="вас@email.ru" required>
+      </div>
+      <div class="form-row">
+        <label for="story">История о Кате</label>
+        <textarea id="story" name="story" placeholder="Расскажите о Кате, которую вы знаете — маме, дочери, подруге, коллеге…" required></textarea>
+      </div>
+      <button type="submit" class="btn"><span>Отправить историю</span></button>
+      <p id="formStatus" style="margin-top:18px;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--blue-deep);"></p>
+    </form>
+
+    <div class="reviews reveal reveal-delay-2">
+      <h3 class="reviews-title">Истории, которые уже рассказали</h3>
+      <div class="review-list">
+        <div class="review">
+          <p>«Моя бабушка Катя пекла пироги, от запаха которых просыпался весь дом. Имя для меня пахнет ванилью и яблоками».</p>
+          <div class="review-author">— Анна, Санкт‑Петербург</div>
+        </div>
+        <div class="review">
+          <p>«Жену зовут Катюша. Двадцать два года вместе — и каждое утро это имя звучит у меня в голове как мелодия».</p>
+          <div class="review-author">— Дмитрий, Казань</div>
+        </div>
+        <div class="review">
+          <p>«Дочка родилась в феврале, в метель. Назвали Катериной — за чистоту первого снега. Не пожалели ни разу».</p>
+          <div class="review-author">— Ольга, Екатеринбург</div>
+        </div>
+        <div class="review">
+          <p>«Сестру я зову Катюхой с детского сада. Она единственный человек, при котором мне не нужно держать спину прямо, — и за это я её бесконечно люблю».</p>
+          <div class="review-author">— Михаил, Новосибирск</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-name">Катя</div>
+  <p>Имя, в котором небо и сталь</p>
+  <small>© 2026 · Сделано с теплом</small>
+</footer>
+
+<script>
+  // Sticky nav state
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile burger
+  const burger = document.getElementById('navBurger');
+  const menu = document.getElementById('navMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    menu.classList.toggle('open');
+  });
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      burger.classList.remove('open');
+      menu.classList.remove('open');
+    });
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Align lace tiles across sections so the pattern reads as one
+  // continuous strip from top to bottom — no visible seams at section
+  // boundaries. Each section gets a custom CSS var --lace-y that shifts
+  // its pattern phase to match the global 200px tile grid.
+  const TILE = 200;
+  function alignLace() {
+    document.querySelectorAll('.hero, section').forEach(sec => {
+      const top = sec.getBoundingClientRect().top + window.scrollY;
+      const offset = ((Math.round(top) % TILE) + TILE) % TILE;
+      sec.style.setProperty('--lace-y', `-${offset}px`);
+    });
+  }
+  alignLace();
+  window.addEventListener('load', alignLace);
+  window.addEventListener('resize', alignLace);
+  // Re-align after web fonts settle (font load can change section heights).
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(alignLace);
+  }
+
+  // Form
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const story = form.story.value.trim();
+    if (!name || !email || !story) {
+      status.textContent = 'Пожалуйста, заполните все поля.';
+      status.style.color = '#B85A5A';
+      return;
+    }
+    status.textContent = 'Спасибо, ' + name + ' — история о вашей Кате принята.';
+    status.style.color = 'var(--blue-deep)';
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
