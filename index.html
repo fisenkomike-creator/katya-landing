@@ -603,10 +603,11 @@
   .character-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
+    column-gap: 80px;
+    row-gap: 36px;
+    align-items: center;
   }
-  .character-traits { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .trait-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   .trait {
     padding: 24px 22px;
     background: var(--paper);
@@ -627,32 +628,40 @@
   }
   .trait p { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.55; margin: 0; }
 
-  .character-text p {
-    margin-bottom: 22px;
+  .character-para {
+    margin: 0;
     font-size: 1.04rem;
     color: var(--ink-soft);
+    line-height: 1.7;
   }
   .character-quote {
-    margin-top: 32px;
-    padding: 30px 28px;
-    background: linear-gradient(135deg, var(--blue-soft), var(--white));
-    border-radius: 4px;
+    margin: 70px auto 0;
+    max-width: 760px;
+    padding: 6px 28px 6px 44px;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 1.25rem;
     color: var(--ink);
-    line-height: 1.5;
+    line-height: 1.55;
     position: relative;
-    border: 1px solid rgba(168, 197, 224, 0.3);
   }
   .character-quote::before {
     content: "\201C";
     position: absolute;
-    top: -10px; left: 18px;
+    top: 28px; left: 8px;
     font-family: 'Playfair Display', serif;
-    font-size: 4.5rem;
+    font-size: 3.2rem;
     color: var(--blue);
-    line-height: 1;
+    line-height: 0;
+  }
+
+  @media (max-width: 720px) {
+    .character-quote {
+      margin-top: 50px;
+      padding: 4px 16px 4px 36px;
+      font-size: 1.12rem;
+    }
+    .character-quote::before { font-size: 2.8rem; left: 4px; top: 24px; }
   }
 
   /* ===== CONTACT ===== */
@@ -815,10 +824,11 @@
   .reveal-delay-4 { transition-delay: 0.4s; }
 
   /* ===== RESPONSIVE ===== */
-  /* On iPad-ish widths the famous-grid falls to 2 columns and the 9th card sits alone.
+  /* On iPad-ish widths the famous-grid and forms-grid fall to 2 columns and the 9th card sits alone.
      Hide it in that range only — 1-col (mobile) and 3-col (desktop) layouts are balanced. */
   @media (min-width: 640px) and (max-width: 959px) {
-    .famous-grid > .famous-card:last-child { display: none; }
+    .famous-grid > .famous-card:last-child,
+    .forms-grid > .form-card:last-child { display: none; }
   }
 
   @media (max-width: 900px) {
@@ -837,14 +847,14 @@
     .nav-menu a { display: block; padding: 14px 32px; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; }
     .nav-burger { display: flex; }
 
-    .origin-grid, .character-grid { grid-template-columns: 1fr; gap: 50px; }
-    .character-traits { grid-template-columns: 1fr 1fr; }
+    .origin-grid { grid-template-columns: 1fr; gap: 50px; }
+    .character-grid { grid-template-columns: 1fr; row-gap: 24px; }
     section { padding: 80px 24px; }
     .contact-form { padding: 38px 28px; }
   }
 
   @media (max-width: 520px) {
-    .character-traits { grid-template-columns: 1fr; }
+    .trait-row { grid-template-columns: 1fr; }
     .nav-inner { padding: 14px 22px; }
     .nav-logo { font-size: 1.4rem; }
     .hero { padding: 110px 22px 60px; }
@@ -1347,32 +1357,13 @@
     </div>
 
     <div class="character-grid">
-      <div class="character-text reveal">
-        <p>
-          Считается, что Кати с детства — наблюдатели. Они учатся быстро, но не
-          напоказ; читают много, но редко хвастаются прочитанным. Внутри —
-          стержень, снаружи — мягкость, и эта пара даёт характерную для имени
-          интонацию: спокойную силу.
-        </p>
-        <p>
-          Во взрослой жизни Катя обычно знает, чего хочет. Она умеет ждать, но
-          умеет и принимать решения за секунду — особенно когда речь о близких.
-          На неё можно опереться, и это знают все вокруг. Иногда даже слишком.
-        </p>
-        <p>
-          В любви Катя верна — но не покорна. В работе — упорна, но не
-          фанатична. В дружбе — внимательна, но без сентиментальности. Это имя
-          ровного света, не вспышек.
-        </p>
-
-        <div class="character-quote">
-          В каждой Кате живёт немного императрицы — и немного девочки,
-          которая боится, что её не услышат. Услышьте — и она сделает для вас
-          невозможное.
-        </div>
-      </div>
-
-      <div class="character-traits reveal reveal-delay-2">
+      <p class="character-para reveal">
+        Считается, что Кати с детства — наблюдатели. Они учатся быстро, но не
+        напоказ; читают много, но редко хвастаются прочитанным. Внутри —
+        стержень, снаружи — мягкость, и эта пара даёт характерную для имени
+        интонацию: спокойную силу.
+      </p>
+      <div class="trait-row reveal reveal-delay-1">
         <div class="trait">
           <h4 class="trait-title">Внутренняя сила</h4>
           <p>Спокойная, без надрыва. Видна в кризисе, не в обыденности.</p>
@@ -1381,6 +1372,14 @@
           <h4 class="trait-title">Чувство вкуса</h4>
           <p>В одежде, словах, людях. Замечает фальшь раньше других.</p>
         </div>
+      </div>
+
+      <p class="character-para reveal">
+        Во взрослой жизни Катя обычно знает, чего хочет. Она умеет ждать, но
+        умеет и принимать решения за секунду — особенно когда речь о близких.
+        На неё можно опереться, и это знают все вокруг. Иногда даже слишком.
+      </p>
+      <div class="trait-row reveal reveal-delay-1">
         <div class="trait">
           <h4 class="trait-title">Эмпатия</h4>
           <p>Слушает не из вежливости, а из настоящего интереса к человеку.</p>
@@ -1389,6 +1388,14 @@
           <h4 class="trait-title">Любовь к слову</h4>
           <p>Книги, языки, переписка. Часто — литературный или редакторский талант.</p>
         </div>
+      </div>
+
+      <p class="character-para reveal">
+        В любви Катя верна — но не покорна. В работе — упорна, но не
+        фанатична. В дружбе — внимательна, но без сентиментальности. Это имя
+        ровного света, не вспышек.
+      </p>
+      <div class="trait-row reveal reveal-delay-1">
         <div class="trait">
           <h4 class="trait-title">Гордость</h4>
           <p>Не позволит унизить себя дважды. Прощает один раз — и навсегда уходит.</p>
@@ -1398,6 +1405,12 @@
           <p>Друзьям, семье, своему слову. Это её главная валюта.</p>
         </div>
       </div>
+    </div>
+
+    <div class="character-quote reveal reveal-delay-3">
+      В каждой Кате живёт немного императрицы — и немного девочки,
+      которая боится, что её не услышат. Услышьте — и она сделает для вас
+      невозможное.
     </div>
   </div>
 </section>
