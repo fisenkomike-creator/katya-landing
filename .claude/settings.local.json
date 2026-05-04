@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where magick *)",
+      "Bash(where convert *)",
+      "Bash(where inkscape *)",
+      "Bash(where node *)",
+      "Bash(where python *)",
+      "Bash(python -c \"from PIL import Image, ImageDraw, ImageFont; print\\('PIL ok'\\)\")",
+      "Bash(python -c \"import cairosvg; print\\('cairosvg ok'\\)\")",
+      "Bash(python -c \"import os; fonts = [f for f in os.listdir\\(r'C:\\\\Windows\\\\Fonts'\\) if 'cambria' in f.lower\\(\\) or 'constantia' in f.lower\\(\\) or 'georgia' in f.lower\\(\\) or 'times' in f.lower\\(\\) or 'palatin' in f.lower\\(\\)]; print\\('\\\\n'.join\\(fonts[:30]\\)\\)\")",
+      "Bash(python build_og_image.py)"
+    ]
+  }
+}
